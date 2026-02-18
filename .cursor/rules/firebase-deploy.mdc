@@ -1,0 +1,44 @@
+---
+description: Firebase Hosting deployment for Chattanooga Adventures (production + test)
+alwaysApply: true
+---
+
+# Firebase Hosting Deployment
+
+## Project Architecture
+
+- **Firebase project:** `chattanooga-adventures`
+- **Production site:** `chattanooga-adventures` → `chattanooga-adventures.web.app`
+- **Test site:** `chattanooga-adventures-test` → `chattanooga-adventures-test.web.app`
+- **GitHub repo:** `swiftturtlelabs/chattanooga-adventures`
+
+## Deploy Targets
+
+Targets are defined in `.firebaserc` and referenced in `firebase.json` (array format with `target` field per entry).
+
+| Target       | Site ID                        | Branch   | Workflow                              |
+|--------------|--------------------------------|----------|---------------------------------------|
+| `production` | `chattanooga-adventures`       | `main`   | `.github/workflows/firebase_deploy.yml`      |
+| `test`       | `chattanooga-adventures-test`  | `test`   | `.github/workflows/firebase_deploy_test.yml` |
+
+## How to Deploy
+
+### Via Git (CI/CD — preferred)
+
+- Push to `test` → auto-deploys to test site via GitHub Actions
+- Push/merge to `main` → auto-deploys to production via GitHub Actions
+- GitHub secret `FIREBASE_SERVICE_ACCOUNT` must contain the full service account JSON
+
+### Via CLI (manual)
+
+```powershell
+firebase deploy --only hosting:test        # deploy to test site
+firebase deploy --only hosting:production  # deploy to production site
+```
+
+## Important Notes
+
+- `firebase.json` uses **array format** for multi-site hosting — each entry must have a `target` field
+- The `public` directory is `.` (project root) — site files live at the repo root
+- The `docs/` folder, `.github/`, and config files are excluded via `ignore` in `firebase.json`
+- Shell is PowerShell on Windows — avoid bash-only syntax (`&&`, heredocs)
