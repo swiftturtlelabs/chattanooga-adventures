@@ -1,6 +1,6 @@
 ---
 name: Firebase hosting migration
-overview: Migrate Chattanooga Adventures from InfinityFree FTP hosting to Firebase Hosting, set up a test subdomain (test.chattanooga-adventures.com), replace the GitHub Actions workflow, and update DNS in Squarespace.
+overview: Migrate Chattanooga Adventures from InfinityFree FTP hosting to Firebase Hosting, set up a test subdomain (test.chattanooga-adventures.com), replace the GitHub Actions workflow, and manage DNS via Cloudflare.
 todos:
   - id: firebase-json
     content: Create firebase.json with hosting config (public dir, ignore list, cleanUrls, headers)
@@ -39,7 +39,7 @@ isProject: false
 - Static site: `index.html`, `404.html`, `style.css`, `script.js`
 - Deployed to InfinityFree via FTP using `[.github/workflows/ftp_deploy.yml](.github/workflows/ftp_deploy.yml)`
 - Apache-specific `[.htaccess](.htaccess)` for HTTPS redirect and custom 404
-- Domain managed via Squarespace DNS
+- Domain registered via Squarespace, DNS managed via Cloudflare (free tier)
 
 ## Architecture Overview
 
@@ -53,13 +53,19 @@ flowchart LR
     prodSite["Production Site<br/>chattanooga-adventures.com"]
     testSite["Test Site<br/>test.chattanooga-adventures.com"]
   end
-  subgraph squarespace [Squarespace DNS]
-    prodDNS["A records -> Firebase"]
-    testDNS["CNAME test -> Firebase"]
+  subgraph cloudflare [Cloudflare DNS<br/>free tier]
+    prodDNS["A @ -> Firebase IP<br/>(DNS only)"]
+    wwwDNS["CNAME www -> Firebase<br/>(DNS only)"]
+    testDNS["CNAME test -> Firebase<br/>(DNS only)"]
+  end
+  subgraph squarespace [Squarespace<br/>domain registrar]
+    nameservers["Nameservers -> Cloudflare"]
   end
   mainBranch -->|"push triggers deploy"| prodSite
   testBranch -->|"push triggers deploy"| testSite
+  nameservers --> cloudflare
   prodDNS --> prodSite
+  wwwDNS --> prodSite
   testDNS --> testSite
 ```
 
@@ -78,7 +84,7 @@ These are manual steps you will need to do in the [Firebase Console](https://con
 3. Connect custom domains in Firebase Hosting settings:
   - For the production site: add `chattanooga-adventures.com` and `www.chattanooga-adventures.com`
   - For the test site: add `test.chattanooga-adventures.com`
-  - Firebase will give you DNS records (A records and TXT records) to add in Squarespace for verification
+  - Firebase will give you DNS records (A records and TXT records) to add in Cloudflare for verification
 
 ---
 
@@ -250,17 +256,39 @@ This file should NOT exist on the `main` branch so that the production site rema
 
 ---
 
-## Step 6: Update Squarespace DNS
+## Step 6: Set Up Cloudflare DNS and Point Nameservers
 
-In Squarespace Domains -> DNS Settings for `chattanooga-adventures.com`:
+Squarespace's DNS management doesn't reliably sync custom records to its Google Cloud DNS nameservers. Use Cloudflare (free tier) for DNS management instead.
 
-1. **Remove** any existing A records or CNAME records pointing to InfinityFree
-2. **Add** the DNS records Firebase provides during custom domain setup (Step 1). Typically:
-  - **A records** for `chattanooga-adventures.com` pointing to Firebase's IPs (e.g., `199.36.158.100`)
-  - **TXT record** for domain verification (Firebase will show the exact value)
-  - **CNAME** for `www` -> Firebase-provided target
-  - **CNAME** for `test` -> Firebase-provided target (for `test.chattanooga-adventures.com`)
-3. Wait for DNS propagation and SSL provisioning (Firebase handles SSL automatically; may take up to 24 hours)
+### 6a: Set up Cloudflare
+
+1. Create a free account at [Cloudflare](https://dash.cloudflare.com/sign-up)
+2. Add `chattanooga-adventures.com` as a site (select Free plan)
+3. Cloudflare will assign you two nameservers — note them down
+
+### 6b: Point nameservers to Cloudflare
+
+In Squarespace Domains -> `chattanooga-adventures.com` -> Nameservers:
+
+1. Replace the current nameservers with the Cloudflare nameservers
+2. Remove any custom DNS records from Squarespace (they're no longer needed)
+
+> **Warning:** Switching nameservers will cause downtime for any currently hosted site. Have Firebase deploys ready before switching.
+
+### 6c: Add Firebase DNS records in Cloudflare
+
+In the Cloudflare dashboard -> DNS tab:
+
+1. **Add** the DNS records Firebase provides during custom domain setup (Step 1):
+   - **TXT** `@` -> `hosting-site=chattanooga-adventures` (verification)
+   - **A** `@` -> Firebase IP (e.g., `199.36.158.100`) — **DNS only** (gray cloud)
+   - **TXT** `test` -> `hosting-site=chattanooga-adventures-test` (verification)
+   - **CNAME** `www` -> Firebase-provided target — **DNS only** (gray cloud)
+   - **CNAME** `test` -> Firebase-provided target — **DNS only** (gray cloud)
+2. **Important:** All A/CNAME records must be set to **"DNS only"** (gray cloud, not orange proxy) so Firebase can handle SSL provisioning
+3. Cloudflare DNS propagation is fast (minutes, not hours)
+
+See `docs/FIREBASE_HOSTING_SETUP.md` for detailed step-by-step instructions.
 
 ---
 

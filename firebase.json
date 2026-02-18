@@ -7,6 +7,7 @@
       ".github/**",
       ".gitignore",
       ".htaccess",
+      "docs/**",
       "README.md"
     ],
     "cleanUrls": true,
