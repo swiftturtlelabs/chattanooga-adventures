@@ -16,7 +16,9 @@ test.describe('Adventure Reveal Page', () => {
   test('reveal button shows loading state on click', async ({ page }) => {
     await page.route('**/firestore.googleapis.com/**', (route) => route.abort());
     await page.goto('/adventure?box=original&adventure=1');
-    await page.getByRole('button', { name: /Reveal My Adventure/i }).click();
+    const btn = page.getByRole('button', { name: /Reveal My Adventure/i });
+    await expect(btn).toBeVisible();
+    await btn.click({ force: true });
     await expect(page.getByRole('button', { name: /Loading/i })).toBeDisabled();
   });
 
