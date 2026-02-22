@@ -52,7 +52,10 @@ function init() {
         window.location.href = '/adventures';
       }, 400);
     });
-    siteTitle.addEventListener('click', tracker);
+    siteTitle.addEventListener('click', (e) => {
+      e.preventDefault();
+      tracker();
+    });
   }
 }
 

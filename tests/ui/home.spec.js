@@ -5,7 +5,7 @@ test.describe('Home Page', () => {
   test('renders hero section with title and subtitle', async ({ page }) => {
     await page.goto('/');
     await expect(page.getByRole('heading', { name: /Explore the Scenic City/i })).toBeVisible();
-    await expect(page.getByText(/box of adventure cards/i)).toBeVisible();
+    await expect(page.locator('.hero').getByText(/box of adventure cards/i)).toBeVisible();
   });
 
   test('renders about section', async ({ page }) => {

@@ -14,10 +14,10 @@ test.describe('Adventure Reveal Page', () => {
   });
 
   test('reveal button shows loading state on click', async ({ page }) => {
+    await page.route('**/firestore.googleapis.com/**', () => {});
     await page.goto('/adventure?box=original&adventure=1');
-    const btn = page.getByRole('button', { name: /Reveal My Adventure/i });
-    await btn.click();
-    await expect(btn).toBeDisabled();
+    await page.getByRole('button', { name: /Reveal My Adventure/i }).click();
+    await expect(page.getByRole('button', { name: /Loading/i })).toBeDisabled();
   });
 
   test('accessibility audit — teaser state', async ({ page }) => {
