@@ -37,7 +37,7 @@ These must be completed first because AI-written code and tests depend on them b
 ### 5. Configure GitHub Branch Protection Rules
 - Go to the GitHub repo **Settings > Branches > Branch protection rules**
 - For both `main` and `test` branches:
-  - Require status checks to pass: `lint-and-test` (from unit_tests.yml), `e2e` (from e2e_tests.yml)
+  - Require status checks to pass: `Lint & Unit Tests` (from unit_tests.yml), `e2e-tests / E2E & Integration Tests` (from deploy workflow calling e2e_tests.yml)
   - Require at least 1 approving review on pull requests
   - Block direct pushes to `main`
 - This is configured in GitHub's UI, not in code (ref: [plan Section 9](Site_Build_Plan.md), task 18)

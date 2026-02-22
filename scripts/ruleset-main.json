@@ -24,7 +24,10 @@
       "type": "required_status_checks",
       "parameters": {
         "strict_required_status_checks_policy": true,
-        "required_status_checks": [{ "context": "unit_tests" }, { "context": "e2e_tests" }]
+        "required_status_checks": [
+          { "context": "Lint & Unit Tests" },
+          { "context": "e2e-tests / E2E & Integration Tests" }
+        ]
       }
     }
   ]
