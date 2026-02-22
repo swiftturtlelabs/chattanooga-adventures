@@ -32,6 +32,12 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      - name: Setup Java for Firebase emulator
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
@@ -39,7 +45,7 @@ jobs:
         run: |
           firebase emulators:start --only firestore --project chattanooga-adventures-test &
           sleep 8
-          npx vitest run --dir tests/api
+          npx vitest run tests/api
         env:
           FIRESTORE_EMULATOR_HOST: localhost:8080
 
