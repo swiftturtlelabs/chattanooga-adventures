@@ -1,0 +1,48 @@
+---
+description: Code quality standards for Chattanooga Adventures -- enforces accessibility, testability, and mobile-first patterns across all generated code
+alwaysApply: true
+---
+
+# Quality Standards
+
+## HTML
+
+- Use semantic elements (`<nav>`, `<main>`, `<section>`, `<article>`, `<header>`, `<footer>`) -- never generic `<div>` soup
+- Every `<img>` requires a meaningful `alt` attribute
+- Every form control requires an associated `<label>` (via `for`/`id` or wrapping)
+- Every `<button>` must have an accessible name (visible text or `aria-label`)
+- Use ARIA attributes only when native semantics are insufficient
+- Validate nesting: no `<div>` inside `<p>`, no interactive elements inside other interactive elements
+
+## CSS
+
+- Mobile-first: base styles target small screens (~375px), scale up with `min-width` breakpoints at `600px` and `1024px`
+- Use CSS custom properties defined in `style.css` for colors, spacing, and typography -- do not introduce new hardcoded values
+- Ensure sufficient color contrast (WCAG AA: 4.5:1 for normal text, 3:1 for large text)
+- Interactive elements must have visible `:focus` styles for keyboard navigation
+
+## JavaScript
+
+- ES module pattern: use `import`/`export`, no implicit globals, no `var`
+- Every `async` operation must have `try`/`catch` with user-facing error feedback
+- Separate logic from DOM manipulation: pure functions for data processing, thin DOM layer that calls them
+- No hardcoded Firestore paths or config values -- use constants or config imports from `js/firebase-config.js`
+- Manage focus after dynamic content changes (e.g., move focus to revealed adventure content after animation completes)
+
+## Accessibility (WCAG 2.1 AA)
+
+- All pages must be fully keyboard-navigable (Tab, Shift+Tab, Enter, Escape)
+- Dynamic content updates must use `aria-live` regions or focus management so screen readers announce changes
+- Touch targets must be at least 44x44px on mobile
+- Skip-to-content link on every page
+
+## Testability
+
+- Write small, pure functions that are independently testable -- avoid side effects in logic functions
+- Query DOM elements in tests via accessible roles and labels (`getByRole`, `getByLabel`), not CSS class names
+- Design modules so Firestore and EmailJS dependencies are injectable/mockable
+
+## Lint Compliance
+
+- All generated code must pass ESLint (`eslint:recommended`) and Prettier without modification
+- Use `const` by default, `let` only when reassignment is needed

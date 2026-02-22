@@ -1,0 +1,43 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: ['**']
+  workflow_call:
+
+jobs:
+  lint-and-test:
+    name: Lint & Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ESLint
+        run: npx eslint . --ext .js
+
+      - name: Prettier check
+        run: npx prettier --check "**/*.{js,css,html,json}" --ignore-path .gitignore
+
+      - name: HTML validation
+        run: npx html-validate "*.html"
+
+      - name: Unit tests with coverage
+        run: npx vitest run tests/unit --coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
