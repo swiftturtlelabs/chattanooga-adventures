@@ -1,4 +1,7 @@
 {
+  "firestore": {
+    "rules": "firestore.rules"
+  },
   "hosting": [
     {
       "target": "production",
@@ -8,9 +11,26 @@
         ".firebaserc",
         ".github/**",
         ".gitignore",
-        ".htaccess",
+        ".cursor/**",
         "docs/**",
-        "README.md"
+        "README.md",
+        "QR_Codes/**",
+        "scripts/**",
+        "node_modules/**",
+        "package.json",
+        "package-lock.json",
+        "tests/**",
+        "coverage/**",
+        "playwright-report/**",
+        "test-results/**",
+        "vitest.config.js",
+        "playwright.config.js",
+        "lighthouserc.json",
+        ".eslintrc.json",
+        ".prettierrc",
+        ".husky/**",
+        ".htmlvalidate.json",
+        "firestore.rules"
       ],
       "cleanUrls": true,
       "trailingSlash": false,
@@ -34,9 +54,26 @@
         ".firebaserc",
         ".github/**",
         ".gitignore",
-        ".htaccess",
+        ".cursor/**",
         "docs/**",
-        "README.md"
+        "README.md",
+        "QR_Codes/**",
+        "scripts/**",
+        "node_modules/**",
+        "package.json",
+        "package-lock.json",
+        "tests/**",
+        "coverage/**",
+        "playwright-report/**",
+        "test-results/**",
+        "vitest.config.js",
+        "playwright.config.js",
+        "lighthouserc.json",
+        ".eslintrc.json",
+        ".prettierrc",
+        ".husky/**",
+        ".htmlvalidate.json",
+        "firestore.rules"
       ],
       "cleanUrls": true,
       "trailingSlash": false,
@@ -47,6 +84,15 @@
             {
               "key": "Cache-Control",
               "value": "max-age=3600"
+            }
+          ]
+        },
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "X-Robots-Tag",
+              "value": "noindex, nofollow"
             }
           ]
         }

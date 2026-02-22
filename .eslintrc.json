@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["compat"],
+  "rules": {
+    "compat/compat": "warn",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-unused-vars": ["error", { "caughtErrors": "none" }]
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.js", "scripts/**/*.js", "vitest.config.js", "playwright.config.js"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "compat/compat": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["node_modules/", ".firebase/"]
+}
