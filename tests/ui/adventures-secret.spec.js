@@ -25,14 +25,16 @@ test.describe('Secret Adventures Page', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('visual regression — mobile', async ({ page }) => {
+  test('visual regression — mobile', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/adventures');
     await page.waitForTimeout(1500);
     await expect(page).toHaveScreenshot('adventures-mobile.png');
   });
 
-  test('visual regression — desktop', async ({ page }) => {
+  test('visual regression — desktop', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/adventures');
     await page.waitForTimeout(1500);

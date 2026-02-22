@@ -14,7 +14,7 @@ test.describe('Adventure Reveal Page', () => {
   });
 
   test('reveal button shows loading state on click', async ({ page }) => {
-    await page.route('**/firestore.googleapis.com/**', () => {});
+    await page.route('**/firestore.googleapis.com/**', (route) => route.abort());
     await page.goto('/adventure?box=original&adventure=1');
     await page.getByRole('button', { name: /Reveal My Adventure/i }).click();
     await expect(page.getByRole('button', { name: /Loading/i })).toBeDisabled();
@@ -32,12 +32,14 @@ test.describe('Adventure Reveal Page', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('visual regression — teaser', async ({ page }) => {
+  test('visual regression — teaser', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.goto('/adventure?box=original&adventure=1');
     await expect(page).toHaveScreenshot('adventure-teaser.png');
   });
 
-  test('visual regression — error', async ({ page }) => {
+  test('visual regression — error', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.goto('/adventure');
     await expect(page).toHaveScreenshot('adventure-error.png');
   });

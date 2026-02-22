@@ -35,14 +35,16 @@ test.describe('Home Page', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('visual regression — mobile', async ({ page }) => {
+  test('visual regression — mobile', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
     await page.waitForTimeout(1500);
     await expect(page).toHaveScreenshot('home-mobile.png');
   });
 
-  test('visual regression — desktop', async ({ page }) => {
+  test('visual regression — desktop', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
     await page.waitForTimeout(1500);

@@ -30,12 +30,14 @@ test.describe('Support Form', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('visual regression — empty form', async ({ page }) => {
+  test('visual regression — empty form', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.goto('/support');
     await expect(page).toHaveScreenshot('support-empty.png');
   });
 
-  test('visual regression — validation errors', async ({ page }) => {
+  test('visual regression — validation errors', { tag: '@vrt' }, async ({ page }) => {
+    test.skip(!!process.env.CI, 'No baseline snapshots for Linux CI');
     await page.goto('/support');
     await page.getByRole('button', { name: /Send Message/i }).click();
     await expect(page).toHaveScreenshot('support-validation.png');
