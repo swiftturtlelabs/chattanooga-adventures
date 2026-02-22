@@ -36,7 +36,8 @@
   },
   "browserslist": [
     "defaults",
-    "not dead"
+    "not dead",
+    "not op_mini all"
   ],
   "dependencies": {
     "qrcode": "^1.5.4"

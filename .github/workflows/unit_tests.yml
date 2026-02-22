@@ -33,7 +33,7 @@ jobs:
         run: npx html-validate "*.html"
 
       - name: Unit tests with coverage
-        run: npx vitest run --dir tests/unit --coverage
+        run: npx vitest run tests/unit --coverage
 
       - name: Upload coverage report
         if: always()
