@@ -8,6 +8,11 @@ on:
     branches:
       - test
 
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
 jobs:
   unit-tests:
     uses: ./.github/workflows/unit_tests.yml
