@@ -13,12 +13,12 @@ import {
  * These are client-side keys and safe to commit.
  */
 const FIREBASE_CONFIG = {
-  apiKey: 'TODO_REPLACE_WITH_FIREBASE_API_KEY',
+  apiKey: 'AIzaSyClwRKKr4uLcKuXa7kyDcTS424WDdrrags',
   authDomain: 'chattanooga-adventures.firebaseapp.com',
   projectId: 'chattanooga-adventures',
   storageBucket: 'chattanooga-adventures.firebasestorage.app',
-  messagingSenderId: 'TODO_REPLACE_WITH_SENDER_ID',
-  appId: 'TODO_REPLACE_WITH_APP_ID',
+  messagingSenderId: '595841889827',
+  appId: '1:595841889827:web:930f90f895a24aad066396',
 };
 
 export const EMAILJS_CONFIG = {

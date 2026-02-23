@@ -32,6 +32,41 @@ const SEED_DATA = {
         description:
           "See seven states from Lover's Leap at this enchanted mountaintop garden atop Lookout Mountain. Walk through massive ancient rock formations, cross a swinging bridge, and discover the beauty of over 400 native plant species.",
       },
+      4: {
+        title: 'Visit the Tennessee Aquarium',
+        description:
+          'Discover aquatic life from around the world at the Tennessee Aquarium on the banks of the Tennessee River. Explore two buildings — River Journey and Ocean Journey — featuring river otters, penguins, sharks, and freshwater habitats from the Appalachian mountains to the Gulf of Mexico.',
+      },
+      5: {
+        title: 'Walk the Walnut Street Bridge',
+        description:
+          'Stroll across one of the longest pedestrian bridges in the world. The historic Walnut Street Bridge spans the Tennessee River, connecting downtown Chattanooga to the North Shore and Coolidge Park with stunning views of the city skyline and Lookout Mountain.',
+      },
+      6: {
+        title: 'Hike Sunset Rock on Lookout Mountain',
+        description:
+          'Take a scenic hike through the Bluff Trail to Sunset Rock on Lookout Mountain for a panoramic view of the Tennessee Valley. This moderate trail rewards hikers with one of the most breathtaking sunset vistas in the region.',
+      },
+      7: {
+        title: 'Tour the Chattanooga Choo Choo',
+        description:
+          'Visit the historic Terminal Station, made famous by the 1941 Glenn Miller song. The Chattanooga Choo Choo complex features beautifully restored train cars, a model railroad museum, gardens, and shops in the heart of the Southside district.',
+      },
+      8: {
+        title: 'Explore the Bluff View Art District',
+        description:
+          'Wander through the charming Bluff View Art District perched high above the Tennessee River. This vibrant neighborhood features the Hunter Museum of American Art, sculpture gardens, cozy cafés, and galleries showcasing regional and national artists.',
+      },
+      9: {
+        title: 'Paddle the Tennessee River',
+        description:
+          'Rent a kayak or stand-up paddleboard and explore the Tennessee River from the water. Paddle past downtown Chattanooga, under historic bridges, and along the riverwalk for a unique perspective of the city and its surrounding bluffs.',
+      },
+      10: {
+        title: 'Visit Point Park on Lookout Mountain',
+        description:
+          'Step back in time at Point Park, part of the Chickamauga and Chattanooga National Military Park. Standing at the summit of Lookout Mountain, this Civil War battlefield offers panoramic views, historic monuments, and the story of the famous "Battle Above the Clouds."',
+      },
     },
   },
 };
