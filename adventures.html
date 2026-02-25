@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Page Not Found | Chattanooga Adventures</title>
+    <title>All Adventures | Chattanooga Adventures</title>
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -12,15 +13,17 @@
     <header class="site-header">
       <nav class="site-nav" aria-label="Main navigation">
         <a href="/" class="site-nav__logo">Chattanooga Adventures</a>
+        <ul class="site-nav__links">
+          <li><a href="/support">Support</a></li>
+        </ul>
       </nav>
     </header>
 
-    <main id="main" class="adventure-page">
-      <section class="adventure-error">
-        <h1>404</h1>
-        <p>Looks like you took a wrong turn on your adventure!</p>
-        <a href="/" class="btn btn--secondary">Return Home</a>
-      </section>
+    <main id="main" class="adventures-page">
+      <h1>All Adventures</h1>
+      <div id="adventures-container" aria-live="polite">
+        <p class="loading">Loading adventures...</p>
+      </div>
     </main>
 
     <footer class="site-footer">
@@ -30,5 +33,7 @@
       </nav>
       <p>&copy; 2026 Chattanooga Adventures. All rights reserved.</p>
     </footer>
+
+    <script type="module" src="js/adventures.js"></script>
   </body>
 </html>

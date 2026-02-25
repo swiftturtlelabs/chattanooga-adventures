@@ -1,17 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chattanooga Adventures</title>
+    <title>Chattanooga Adventures - Explore the Scenic City</title>
+    <meta
+      name="description"
+      content="Discover Chattanooga one adventure at a time. A box of adventure cards, each with a QR code revealing a unique local experience in the Scenic City."
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="hero">
-      <h1 class="hero__title">Chattanooga Adventures</h1>
-      <p class="hero__subtitle">Exploring the Scenic City</p>
-      <p class="hero__coming-soon">COMING SOON...</p>
-    </div>
-    <script src="script.js"></script>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" class="site-nav__logo" id="site-title">Chattanooga Adventures</a>
+        <ul class="site-nav__links">
+          <li><a href="/support">Support</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading" class="hero__title">
+          Explore the Scenic City, One Adventure at a Time
+        </h1>
+        <p class="hero__subtitle">
+          A box of adventure cards, each revealing a unique Chattanooga experience.
+        </p>
+      </section>
+
+      <section class="about" aria-labelledby="about-heading">
+        <div class="about__content">
+          <h2 id="about-heading">What is Chattanooga Adventures?</h2>
+          <p>
+            A beautifully crafted box of adventure cards, each featuring a QR code that reveals a
+            unique Chattanooga experience. Scan a card, discover your next adventure, and create
+            unforgettable memories in the Scenic City.
+          </p>
+        </div>
+      </section>
+
+      <section class="where-to-buy" aria-labelledby="buy-heading">
+        <div class="where-to-buy__content">
+          <h2 id="buy-heading">Where to Buy</h2>
+          <ul class="locations">
+            <li class="location-card">
+              <h3>Turtleshell Trading Co.</h3>
+              <p>100 Fiddleleaf Lane, Chattanooga, TN</p>
+            </li>
+            <li class="location-card">
+              <h3>Ember Mountain Outpost</h3>
+              <p>742 Cloverhill Ave, Chattanooga, TN</p>
+            </li>
+            <li class="location-card">
+              <h3>Online Store</h3>
+              <p>Coming Soon</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <nav aria-label="Footer navigation">
+        <a href="/support">Contact &amp; Support</a>
+      </nav>
+      <p>&copy; 2026 Chattanooga Adventures. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="js/home.js"></script>
   </body>
 </html>
